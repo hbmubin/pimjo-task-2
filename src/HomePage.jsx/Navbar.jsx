@@ -1,6 +1,21 @@
+import { useState } from "react";
 import Logo from "./../assets/Logo.svg";
 import Sun from "./../assets/Sun.svg";
+import { useEffect } from "react";
 const Navbar = () => {
+  const [theme, setTheme] = useState("light");
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
+
+  const handleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+  console.log(theme);
   return (
     <nav className=" fixed z-40 bg-white w-full">
       <div className="2xl:max-w-[1390px] max-w-[1180px] mx-auto grid grid-cols-2 justify-between items-center pt-9 pb-4">
@@ -10,25 +25,24 @@ const Navbar = () => {
           </div>
           <div>
             <ul className="flex gap-10 text-base font-medium text-slate-500">
-              <li className="text-blue-600">
+              <li className="text-blue-600 hover:text-blue-600">
                 <a href="#">Home</a>
               </li>
-              <li>
+              <li className=" hover:text-blue-600">
                 <a href="#">Features</a>
               </li>
-              <li>
+              <li className=" hover:text-blue-600">
                 <a href="#">Pages</a>
               </li>
-              <li>
+              <li className=" hover:text-blue-600">
                 <a href="#">Support</a>
               </li>
             </ul>
           </div>
         </div>
         <div className="flex justify-end items-center">
-          <div>
+          <div onClick={handleTheme}>
             <img className="max-w-[22px] cursor-pointer" src={Sun} />
-            {/* TO DO: Theme change */}
           </div>
           <div>
             <a
